@@ -27,14 +27,26 @@ public class AddOnCard {
 	private String status;
 	@Column(name="reason",length=500)
 	private String reason;
-	@Column(name="request_id")
-	private int request_id;
 	
 	
 	@ManyToOne
 	@JoinColumn(name="account_no")
 	private Account account;
 	
+	@ManyToOne
+	@JoinColumn(name="request_id")
+	private CustomerRequestList customerRequestList;
+	
+
+	
+	
+	
+	public CustomerRequestList getCustomerRequestList() {
+		return customerRequestList;
+	}
+	public void setCustomerRequestList(CustomerRequestList customerRequestList) {
+		this.customerRequestList = customerRequestList;
+	}
 	public Account getAccount() {
 		return account;
 	}
@@ -71,13 +83,6 @@ public class AddOnCard {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-	public int getRequest_id() {
-		return request_id;
-	}
-	public void setRequest_id(int request_id) {
-		this.request_id = request_id;
-	}
-	
 	
 	
 }

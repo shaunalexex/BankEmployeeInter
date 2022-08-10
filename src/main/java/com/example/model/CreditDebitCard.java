@@ -2,12 +2,18 @@ package com.example.model;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@Entity
+@Table(name="CreditDebitCard")
 public class CreditDebitCard {
 	
 	@Id
@@ -36,18 +42,19 @@ public class CreditDebitCard {
 	@Column(name="maxCreditLimit")
 	double maxCreditLimit;
 	
-	@Column(name="accountNo")
-	int accountno;
+	
+	@ManyToOne
+	@JoinColumn(name="account_no")
+	private Account account;
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
+	public Account getAccount() {
+		return account;
+	}
+	public void setAccount(Account account) {
+		this.account = account;
+	}
 	public int getCardId() {
 		return cardId;
 	}
@@ -96,14 +103,7 @@ public class CreditDebitCard {
 	public void setMaxCreditLimit(double maxCreditLimit) {
 		this.maxCreditLimit = maxCreditLimit;
 	}
-	public int getAccountno() {
-		return accountno;
-	}
-	public void setAccountno(int accountno) {
-		this.accountno = accountno;
-	}
-	
-	
-	
+
+		
 
 }

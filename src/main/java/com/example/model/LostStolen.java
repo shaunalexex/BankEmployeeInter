@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,14 +35,39 @@ public class LostStolen {
 	@Column(name="reason", length=50, nullable=false)
 	String reason;
 	
-	@Column(name="requestId")
-	int requestId;
-	
-	@Column(name="accountNo")
-	int accountNo;
 	
 	@Temporal(TemporalType.DATE)
 	Date cardStolenDate;
+	
+	
+	@ManyToOne
+	@JoinColumn(name="account_no")
+	private Account account;
+	
+	@ManyToOne
+	@JoinColumn(name="request_id")
+	private CustomerRequestList customerRequestList;
+	
+	
+	
+
+	
+
+	public CustomerRequestList getCustomerRequestList() {
+		return customerRequestList;
+	}
+
+	public void setCustomerRequestList(CustomerRequestList customerRequestList) {
+		this.customerRequestList = customerRequestList;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
 
 	public int getLstRequestId() {
 		return lstRequestId;
@@ -82,21 +109,7 @@ public class LostStolen {
 		this.reason = reason;
 	}
 
-	public int getRequestId() {
-		return requestId;
-	}
 
-	public void setRequestId(int requestId) {
-		this.requestId = requestId;
-	}
-
-	public int getAccountNo() {
-		return accountNo;
-	}
-
-	public void setAccountNo(int accountNo) {
-		this.accountNo = accountNo;
-	}
 
 	public Date getCardStolenDate() {
 		return cardStolenDate;

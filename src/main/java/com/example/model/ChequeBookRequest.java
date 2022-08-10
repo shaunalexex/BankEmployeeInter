@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -38,11 +40,32 @@ public class ChequeBookRequest {
 	@Column(name = "reason")
 	private String reason;
 	
-	@Column(name = "request_id")
-	private int request_id;
 	
-	@Column(name = "account_no", length = 16)
-	private int account_no;
+	@ManyToOne
+	@JoinColumn(name="account_no")
+	private Account account;
+	
+	@ManyToOne
+	@JoinColumn(name="request_id")
+	private CustomerRequestList customerRequestList;
+
+
+
+	public CustomerRequestList getCustomerRequestList() {
+		return customerRequestList;
+	}
+
+	public void setCustomerRequestList(CustomerRequestList customerRequestList) {
+		this.customerRequestList = customerRequestList;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
 
 	public int getChequebook_id() {
 		return chequebook_id;
@@ -91,23 +114,8 @@ public class ChequeBookRequest {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-
-	public int getRequest_id() {
-		return request_id;
-	}
-
-	public void setRequest_id(int request_id) {
-		this.request_id = request_id;
-	}
-
-	public int getAccount_no() {
-		return account_no;
-	}
-
-	public void setAccount_no(int account_no) {
-		this.account_no = account_no;
-	}
-	
-	
-
 }
+
+
+
+

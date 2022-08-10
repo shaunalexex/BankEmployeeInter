@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,11 +41,32 @@ public class IncreaseCreditLimit {
 	@Column(name = "reason", length = 500)
 	private String reason;
 	
-	@Column(name = "request_id")
-	private int request_id;
 	
-	@Column(name = "account_no", length = 16)
-	private int account_no;
+	
+	@ManyToOne
+	@JoinColumn(name="account_no")
+	private Account account;
+	
+	@ManyToOne
+	@JoinColumn(name="request_id")
+	private CustomerRequestList customerRequestList;
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	
+	public CustomerRequestList getCustomerRequestList() {
+		return customerRequestList;
+	}
+
+	public void setCustomerRequestList(CustomerRequestList customerRequestList) {
+		this.customerRequestList = customerRequestList;
+	}
 
 	public int getCreditlimit_id() {
 		return creditlimit_id;
@@ -93,21 +116,8 @@ public class IncreaseCreditLimit {
 		this.reason = reason;
 	}
 
-	public int getRequest_id() {
-		return request_id;
-	}
 
-	public void setRequest_id(int request_id) {
-		this.request_id = request_id;
-	}
 
-	public int getAccount_no() {
-		return account_no;
-	}
-
-	public void setAccount_no(int account_no) {
-		this.account_no = account_no;
-	}
 	
 	
 	

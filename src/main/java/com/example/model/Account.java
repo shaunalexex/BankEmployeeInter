@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,8 +25,6 @@ public class Account {
 	private int account_no;
 	@Column(name="account_type",length=45)
 	private String account_type;
-	@Column(name="customer_customer_id")
-	private int customer_customer_id;
 	@Column(name="account_balance",length=10,precision=2)
 	private double account_balance;
 	@Column(name="ifsc_code",length=45)
@@ -33,9 +33,64 @@ public class Account {
 	private String bank_name;
 	@Column(name="branch_name",length=45)
 	private String branch_name;
+	
+	
 	@OneToMany(mappedBy = "account")
 	private List<AddOnCard> addOnCards;
 	
+	@OneToMany(mappedBy = "account")
+	private List<LostStolen> lostStolen;
+	
+	@OneToMany(mappedBy = "account")
+	private List<IncreaseCreditLimit> increaseCreditLimit;
+	
+	@OneToMany(mappedBy = "account")
+	private List<ChequeBookRequest> chequeBookRequest;
+	
+	
+	@OneToMany(mappedBy = "account")
+	private List<CreditDebitCard> creditDebitCard;
+	
+	@OneToMany(mappedBy = "account")
+	private List<QueryRequest> queryRequest;
+	
+	@ManyToOne
+	@JoinColumn(name="customer_id")
+	private Customer customer;
+	
+	
+	
+	
+	public List<LostStolen> getLostStolen() {
+		return lostStolen;
+	}
+	public void setLostStolen(List<LostStolen> lostStolen) {
+		this.lostStolen = lostStolen;
+	}
+	public List<IncreaseCreditLimit> getIncreaseCreditLimit() {
+		return increaseCreditLimit;
+	}
+	public void setIncreaseCreditLimit(List<IncreaseCreditLimit> increaseCreditLimit) {
+		this.increaseCreditLimit = increaseCreditLimit;
+	}
+	public List<ChequeBookRequest> getChequeBookRequest() {
+		return chequeBookRequest;
+	}
+	public void setChequeBookRequest(List<ChequeBookRequest> chequeBookRequest) {
+		this.chequeBookRequest = chequeBookRequest;
+	}
+	public List<CreditDebitCard> getCreditDebitCard() {
+		return creditDebitCard;
+	}
+	public void setCreditDebitCard(List<CreditDebitCard> creditDebitCard) {
+		this.creditDebitCard = creditDebitCard;
+	}
+	public List<QueryRequest> getQueryRequest() {
+		return queryRequest;
+	}
+	public void setQueryRequest(List<QueryRequest> queryRequest) {
+		this.queryRequest = queryRequest;
+	}
 	public List<AddOnCard> getAddOnCards() {
 		return addOnCards;
 	}
@@ -54,11 +109,11 @@ public class Account {
 	public void setAccount_type(String account_type) {
 		this.account_type = account_type;
 	}
-	public int getCustomer_customer_id() {
-		return customer_customer_id;
+	public Customer getCustomer() {
+		return customer;
 	}
-	public void setCustomer_customer_id(int customer_customer_id) {
-		this.customer_customer_id = customer_customer_id;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 	public double getAccount_balance() {
 		return account_balance;
