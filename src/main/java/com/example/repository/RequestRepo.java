@@ -17,21 +17,14 @@ import com.example.model.LostStolen;
 public interface RequestRepo extends JpaRepository<CustomerRequestList,Integer>{
 	
 	
-	@Query("select r from CustomerRequestList r where r.request_type=:type")
-	List<CustomerRequestList> findAllByType(@Param("type") String type);
-
-	@Query("select r from AddOnCard r where r.request_id =: request_id and r.status:=status")
-	AddOnCard findAddOnCardRequestById(@Param("request_id") int request_id, @Param("status") String status);
+	@Query(value = "select lost_stolen.lst_request_id, customer_request_list.request_type, lost_stolen.request_id, account.account_no, customer.customer_name, lost_stolen.request_date, lost_stolen.status from lost_stolen join customer_request_list on lost_stolen.request_id = customer_request_list.request_id join account on account.account_no = lost_stolen.account_no join customer on account.customer_id = customer.customer_id where lost_stolen.status = "
+			+ " ?1 ", nativeQuery=true)
+	List<Object[]> findAllByStatus(String status);
 	
-	@Query("select r from LostStolen r where r.request_id =: request_id and r.status:=status")
-	LostStolen findLostStolenRequestById(@Param("request_id") int request_id, @Param("status") String status);
 	
-	@Query("select r from IncreaseCreditLimit r where r.request_id =: request_id and r.status:=status")
-	IncreaseCreditLimit findCreditLimitRequestById(@Param("request_id") int request_id, @Param("status") String status);
 	
-	@Query("select r from ChequeBookRequest r where r.request_id =: request_id and r.status:=status")
-	ChequeBookRequest findChequeBookRequestById(@Param("request_id") int request_id, @Param("status") String status);
-
-
-
+	
+	
+	
+	
 }

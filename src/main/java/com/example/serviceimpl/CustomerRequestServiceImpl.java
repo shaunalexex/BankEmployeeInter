@@ -6,15 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.example.model.AddOnCard;
-import com.example.model.ChequeBookRequest;
-import com.example.model.CustomerRequestList;
-import com.example.model.IncreaseCreditLimit;
-import com.example.model.LostStolen;
+import org.springframework.stereotype.Service;
 import com.example.repository.RequestRepo;
 import com.example.service.CustomerRequestService;
 
+@Service
 public class CustomerRequestServiceImpl implements CustomerRequestService{
 	
 	@Autowired
@@ -24,53 +20,25 @@ public class CustomerRequestServiceImpl implements CustomerRequestService{
 	public Object getRequestByType(String type, String status) {
 		// TODO Auto-generated method stub
 		
-		List<Map<String, Object>> list = new ArrayList<>();
+		List<Map<String,Object>> list = new ArrayList<>();
 		
-		List<CustomerRequestList> requests = requestRepo.findAllByType(type);
+		List<Object[]> requests = requestRepo.findAllByStatus(status);
 		
-		
-		String rqType;
-		
-		for(CustomerRequestList rq: requests) {
+		for(Object[] rq: requests) {
 			
 			Map<String, Object> map = new HashMap<>();
-			rqType = rq.getRequest_type();
+			map.put("lst_request_id", rq[0]);
+			map.put("request_type", rq[1]);
+			map.put("request_id",rq[2]);
+			map.put("account_no", rq[3]);
+			map.put("customer_name", rq[4]);
+			map.put("request_date", rq[5]);
+			map.put("status", rq[6]);
 			
-			if(rqType=="") 
-			{
-				//request type 1
-				
-				AddOnCard a = requestRepo.findAddOnCardRequestById(rq.getRequest_id(), status);
-				map.put("Account Number",a.getAccount().getAccount_no());
-			}
-			else if(rqType=="") 
-			{
-				//request type 2
-				IncreaseCreditLimit a = requestRepo.findCreditLimitRequestById(rq.getRequest_id(), status);
-				map.put("Account Number",a.getAccount().getAccount_no());
-			
-			}
-			else if(rqType=="") 
-			{
-				//request type 3
-				LostStolen a = requestRepo.findLostStolenRequestById(rq.getRequest_id(), status);
-				map.put("Account Number",a.getAccount().getAccount_no());
-			
-			}
-			else if(rqType=="") 
-			{
-				//request type 4
-				ChequeBookRequest a = requestRepo.findChequeBookRequestById(rq.getRequest_id(), status);
-				map.put("Account Number",a.getAccount().getAccount_no());
-			
-			}
-			
-			map.put("Request Type", type);
-			
-			
-			
-			
+			list.add(map);
+
 		}
+		
 		
 		return list;
 	}
