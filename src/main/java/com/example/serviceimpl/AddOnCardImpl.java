@@ -36,6 +36,24 @@ public class AddOnCardImpl implements AddOnCardService {
 			
 			return map;
 		}
+
+	@Override
+	public Object getAddOnCardById(int id) {
+		// TODO Auto-generated method stub
+		
+		AddOnCard e = addOnCardRepo.findById(id).orElse(null);
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		if(e!=null) {
+			map.put("account_no", e.getAccount().getAccount_no());
+			map.put("customer_name", e.getAccount().getCustomer().getCustomer_name());
+			map.put("request_date", e.getRequest_date());
+			
+		}
+		return map;
+		
+	}
 	}
 
 	
