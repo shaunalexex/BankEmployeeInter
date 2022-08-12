@@ -52,6 +52,40 @@ public class CustomerRequestList {
 	public void setRequest_type(String request_type) {
 		this.request_type = request_type;
 	}
+
+	public List<AddOnCard> getAddOnCards() {
+		return addOnCards;
+	}
+
+	public void setAddOnCards(List<AddOnCard> addOnCards) {
+		this.addOnCards = addOnCards;
+	}
+
+	public List<LostStolen> getLostStolen() {
+		return lostStolen;
+	}
+
+	public void setLostStolen(List<LostStolen> lostStolen) {
+		this.lostStolen = lostStolen;
+	}
+
+	public List<IncreaseCreditLimit> getIncreaseCreditLimit() {
+		return increaseCreditLimit;
+	}
+
+	public void setIncreaseCreditLimit(List<IncreaseCreditLimit> increaseCreditLimit) {
+		this.increaseCreditLimit = increaseCreditLimit;
+	}
+
+	public List<ChequeBookRequest> getChequeBookRequest() {
+		return chequeBookRequest;
+	}
+
+	public void setChequeBookRequest(List<ChequeBookRequest> chequeBookRequest) {
+		this.chequeBookRequest = chequeBookRequest;
+	}
+	
+	
 	
 	
 
