@@ -95,6 +95,43 @@ public class CustomerRequestServiceImpl implements CustomerRequestService{
 			return list;
 		}
 		
+		if(status=="") {
+			
+			switch(type) {
+			
+				case "lost_stolen": 
+					requests = requestRepo.findAlllst(status);
+					break;
+				case "add_on_card": 
+					requests = requestRepo.findAllaoc(status);
+					break;
+				case "cheque_book_request": 
+					requests = requestRepo.findAllcbr(status);
+					break;
+				case "credit_limit": 
+					requests = requestRepo.findAllcl(status);
+					break;
+			}
+			
+			for(Object[] rq: requests) {
+				
+				Map<String, Object> map = new HashMap<>();
+				map.put("request_id", rq[0]);
+				map.put("request_type", rq[1]);
+				map.put("account_no", rq[3]);
+				map.put("customer_name", rq[4]);
+				map.put("request_date", rq[5]);
+				map.put("status", rq[6]);
+				
+				list.add(map);
+
+			}
+			
+			
+			return list;
+			
+		}
+		
 		switch(type) {
 		
 			case "":break;
