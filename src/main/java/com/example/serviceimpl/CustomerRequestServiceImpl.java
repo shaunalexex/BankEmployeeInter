@@ -22,7 +22,7 @@ public class CustomerRequestServiceImpl implements CustomerRequestService{
 		
 		List<Map<String,Object>> list = new ArrayList<>();
 		
-		List<Object[]> requests = requestRepo.findAllByStatus(status);
+		List<Object[]> requests = requestRepo.findAllByStatus("pending");
 		
 		for(Object[] rq: requests) {
 			
