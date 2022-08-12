@@ -3,6 +3,7 @@ package com.example.serviceimpl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,22 +11,32 @@ import com.example.model.AddOnCard;
 import com.example.repository.AddOnCardRepo;
 import com.example.service.AddOnCardService;
 
+
 @Service
 public class AddOnCardImpl implements AddOnCardService {
-
-	private AddOnCardRepo addOnCardRepo;
 	
-	@Transactional
+	@Autowired
+	private AddOnCardRepo addOnCardRepo;
+
 	@Override
-	public Object saveCard(AddOnCard addCard) {
+	public Object updateCard(AddOnCard addCard) {
 		// TODO Auto-generated method stub
-			Map<String, String> map = new HashMap<>();
-			
-				addOnCardRepo.save(addCard);
-				map.put("status", "success");
-				map.put("msg", "Data Saved");
+		AddOnCard addCardObj = addOnCardRepo.findById(addCard.getAddon_card_request_id()).orElse(null);
+		Map<String,Object> map=new HashMap<>();
+		
+		if(addCardObj!=null)
+		{
+			System.out.println(addCard.getStatus());
+			addCardObj.setStatus(addCard.getStatus());
+			addCardObj.setReason(addCard.getReason());
+			addOnCardRepo.saveAndFlush(addCardObj);
+			map.put("status", "success");
+		}
+				
 			
 			return map;
 		}
+	}
+
 	
-}
+
