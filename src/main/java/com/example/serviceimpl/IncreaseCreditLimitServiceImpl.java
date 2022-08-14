@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.model.AddOnCard;
 import com.example.model.ChequeBookRequest;
 import com.example.model.IncreaseCreditLimit;
 import com.example.repository.ChequeBookRequestRepo;
@@ -34,6 +35,26 @@ public class IncreaseCreditLimitServiceImpl implements IncreaseCreditLimitServic
 		}
 		
 		return map;
+	}
+
+	@Override
+	public Object getByCreditLimitId(int id) {
+			
+		IncreaseCreditLimit e = increaseCreditLimitRepo.findById(id).orElse(null);
+			
+			Map<String, Object> map = new HashMap<>();
+			
+			if(e!=null) {
+				map.put("name", e.getAccount().getCustomer().getCustomer_name());
+				map.put("card_type", e.getAccount().getCreditDebitCard().get(0).getCardType());
+				map.put("card_number", e.getAccount().getCreditDebitCard().get(0).getCardNumber());
+				map.put("max_credit_limit", e.getAccount().getCreditDebitCard().get(0).getMaxCreditLimit());
+				map.put("credit_limit", e.getAccount().getCreditDebitCard().get(0).getCreditLimit());
+				map.put("requested_credit_limit", e.getRequest_credit_Limit());
+				
+			}
+			return map;
+			
 	}
 
 }
