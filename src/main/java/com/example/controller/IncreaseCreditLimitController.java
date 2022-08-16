@@ -16,6 +16,7 @@ public class IncreaseCreditLimitController {
 	@Autowired
 	private IncreaseCreditLimitService increaseCreditLimitService;
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value="/updateCreditLimit",method=RequestMethod.PUT)
 	public Object updateEmp(@RequestBody IncreaseCreditLimit a) {
 	        return increaseCreditLimitService.updateCreditLimit(a);

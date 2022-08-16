@@ -17,6 +17,7 @@ public class LostStolenController {
 	@Autowired
 	private LostStolenService lostStolenService;
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value="/updateLostStolenInfo",method=RequestMethod.PUT)
 	public Object updateEmp(@RequestBody LostStolen a) {
 

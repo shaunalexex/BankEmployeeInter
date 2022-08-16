@@ -17,6 +17,7 @@ public class ChequeBookRequestController {
 	@Autowired
 	private ChequeBookRequestService chequeBookRequestService;
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value="/updateCheckBookServiceInfo",method=RequestMethod.PUT)
 	public Object updateEmp(@RequestBody ChequeBookRequest a) {
 	        return chequeBookRequestService.updateChequeBookRequest(a);

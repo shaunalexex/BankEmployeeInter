@@ -22,7 +22,7 @@ public class CustomerRequestController {
 	private CustomerRequestService requestService;
 	
 	@CrossOrigin(origins = "http://localhost:3000")
-	@RequestMapping(value="/getEmpInfo", method=RequestMethod.GET)
+	@RequestMapping(value="/getEmpInfo/{type}/{status}", method=RequestMethod.GET)
 	public Object getEmpDetails(@PathVariable String type, @PathVariable String status) {
 		
 		System.out.println(type+"---"+status);

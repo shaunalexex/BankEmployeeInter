@@ -18,6 +18,7 @@ public class AddOnCardController {
 	@Autowired
 	private AddOnCardService addOnCardService;
 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value="/updateCardInfo",method=RequestMethod.PUT)
 	public Object updateEmp(@RequestBody AddOnCard a) {
 

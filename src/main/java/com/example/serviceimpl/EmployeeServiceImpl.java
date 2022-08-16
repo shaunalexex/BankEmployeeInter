@@ -28,8 +28,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 		if (e!=null)
 		{
 			map.put("empID",e.getUser_id());
-			map.put("empName",e.getPassword());
+			map.put("empPass",e.getPassword());
 		}
+		System.out.println(map);
 		return map;
 	}
 }

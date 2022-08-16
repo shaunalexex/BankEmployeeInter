@@ -29,6 +29,7 @@ public class LostStolenServiceImpl implements LostStolenService {
 			LostStolenObj.setStatus(lostStolen.getStatus());
 			LostStolenObj.setReason(lostStolen.getReason());
 			lostStolenRepo.saveAndFlush(LostStolenObj);
+			System.out.println("Hello");
 			map.put("status", "success");
 		}
 		
